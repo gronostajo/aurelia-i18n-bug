@@ -1,6 +1,7 @@
 import {Router, RouterConfiguration} from 'aurelia-router';
+import {BaseI18N} from "aurelia-i18n";
 
-export class App {
+export class App extends BaseI18N {
   public router: Router;
 
   public configureRouter(config: RouterConfiguration, router: Router) {
