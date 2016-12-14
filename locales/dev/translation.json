@@ -1,0 +1,5 @@
+{
+  "header": "This header is localized",
+  "regular": "This alt text is also localized",
+  "custom": "However, this custom element's attribute is not - instead, it goes into its value"
+}
