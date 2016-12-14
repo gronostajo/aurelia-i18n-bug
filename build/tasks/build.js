@@ -3,6 +3,7 @@ var runSequence = require('run-sequence');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
+var path = require('path');
 var paths = require('../paths');
 var assign = Object.assign || require('object.assign');
 var notify = require('gulp-notify');
@@ -48,6 +49,13 @@ gulp.task('build-css', function() {
     .pipe(browserSync.stream());
 });
 
+gulp.task('build-locales', function() {
+  return gulp.src(paths.locales)
+    .pipe(changed(paths.output, {extension: '.json'}))
+    .pipe(gulp.dest(path.join(paths.output, 'locales')))
+    .pipe(browserSync.stream());
+});
+
 // this task calls the clean task (located
 // in ./clean.js), then runs the build-system
 // and build-html tasks in parallel
@@ -55,7 +63,7 @@ gulp.task('build-css', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css'],
+    ['build-system', 'build-html', 'build-css', 'build-locales'],
     callback
   );
 });
